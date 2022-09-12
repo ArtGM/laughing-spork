@@ -9,13 +9,10 @@ use Ramsey\Uuid\Doctrine\UuidGenerator as UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
-class Post
+#[ORM\HasLifecycleCallbacks]
+class Post implements EntityInterface
 {
-    #[ORM\Id]
-    #[ORM\Column(type:"string", unique:true)]
-    #[ORM\GeneratedValue(strategy:"CUSTOM")]
-    #[ORM\CustomIdGenerator(class:UuidGenerator::class)]
-    private UuidInterface $id;
+    use EntityTrait;
 
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $title;
@@ -23,37 +20,16 @@ class Post
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $content;
 
-    #[ORM\Column(type: 'datetime_immutable')]
-    private ?\DateTimeImmutable $createdAt;
-
-    #[ORM\Column(type: 'datetime_immutable')]
-    private ?\DateTimeImmutable $updatedAt;
-
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $image;
 
     private File $file;
 
-    /**
-     * @return int|null
-     */
-    public function getId(): string
-    {
-        return $this->id->toString();
-    }
-
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @param string $title
-     * @return $this
-     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -61,18 +37,11 @@ class Post
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
-    /**
-     * @param string|null $content
-     * @return $this
-     */
     public function setContent(?string $content): self
     {
         $this->content = $content;
@@ -80,56 +49,11 @@ class Post
         return $this;
     }
 
-    /**
-     * @return \DateTimeImmutable|null
-     */
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param \DateTimeImmutable $createdAt
-     * @return $this
-     */
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTimeImmutable|null
-     */
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @param \DateTimeImmutable $updatedAt
-     * @return $this
-     */
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
     public function getImage(): ?string
     {
         return $this->image;
     }
 
-    /**
-     * @param string|null $image
-     * @return $this
-     */
     public function setImage(?string $image): self
     {
         $this->image = $image;

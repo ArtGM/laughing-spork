@@ -16,7 +16,7 @@ class UserRepositoryTest extends KernelTestCase
      */
     protected AbstractDatabaseTool $databaseTool;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

@@ -10,48 +10,27 @@ use Ramsey\Uuid\Doctrine\UuidGenerator as UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
 
 #[ORM\Entity(repositoryClass: GalleryRepository::class)]
-class Gallery
+#[ORM\HasLifecycleCallbacks]
+class Gallery implements EntityInterface
 {
-    #[ORM\Id]
-    #[ORM\Column(type:"string", unique:true)]
-    #[ORM\GeneratedValue(strategy:"CUSTOM")]
-    #[ORM\CustomIdGenerator(class:UuidGenerator::class)]
-    private UuidInterface $id;
+    use EntityTrait;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $title;
 
-    #[ORM\ManyToMany(targetEntity: Photo::class, inversedBy: 'galleries')]
+    #[ORM\ManyToMany(targetEntity: Photo::class, inversedBy: 'galleries', cascade: ['persist'])]
     private Collection $images;
 
-    /**
-     *
-     */
     public function __construct()
     {
         $this->images = new ArrayCollection();
     }
 
-    /**
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id->toString();
-    }
-
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @param string|null $title
-     * @return $this
-     */
     public function setTitle(?string $title): self
     {
         $this->title = $title;
@@ -59,18 +38,11 @@ class Gallery
         return $this;
     }
 
-    /**
-     * @return Collection<int, Photo>
-     */
     public function getImages(): Collection
     {
         return $this->images;
     }
 
-    /**
-     * @param Photo $image
-     * @return $this
-     */
     public function addImage(Photo $image): self
     {
         if (!$this->images->contains($image)) {
@@ -80,10 +52,6 @@ class Gallery
         return $this;
     }
 
-    /**
-     * @param Photo $image
-     * @return $this
-     */
     public function removeImage(Photo $image): self
     {
         $this->images->removeElement($image);

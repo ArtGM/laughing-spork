@@ -8,13 +8,10 @@ use Ramsey\Uuid\Doctrine\UuidGenerator as UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
 
 #[ORM\Entity(repositoryClass: ConcertRepository::class)]
-class Concert
+#[ORM\HasLifecycleCallbacks]
+class Concert implements EntityInterface
 {
-    #[ORM\Id]
-    #[ORM\Column(type:"string", unique:true)]
-    #[ORM\GeneratedValue(strategy:"CUSTOM")]
-    #[ORM\CustomIdGenerator(class:UuidGenerator::class)]
-    private UuidInterface $id;
+    use EntityTrait;
 
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $title;
@@ -28,26 +25,11 @@ class Concert
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $place;
 
-    /**
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id->toString();
-    }
-
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @param string $title
-     * @return $this
-     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -55,18 +37,11 @@ class Concert
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     * @return $this
-     */
     public function setDescription(string $description): self
     {
         $this->description = $description;
@@ -74,18 +49,11 @@ class Concert
         return $this;
     }
 
-    /**
-     * @return \DateTimeInterface|null
-     */
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
 
-    /**
-     * @param \DateTimeInterface $date
-     * @return $this
-     */
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
@@ -93,18 +61,11 @@ class Concert
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPlace(): ?string
     {
         return $this->place;
     }
 
-    /**
-     * @param string|null $place
-     * @return $this
-     */
     public function setPlace(?string $place): self
     {
         $this->place = $place;

@@ -4,37 +4,32 @@ namespace App\Entity;
 
 use App\Repository\PageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: PageRepository::class)]
-class Page
+#[UniqueEntity(fields: ['slug'], message: 'Une page avec ce titre existe déjà', errorPath: 'title')]
+#[ORM\HasLifecycleCallbacks]
+class Page implements EntityInterface
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private $id;
+    use EntityTrait;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $Title;
+    private ?string $title;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private $content;
+    private ?string $content;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $slug;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    private ?string $slug;
 
     public function getTitle(): ?string
     {
-        return $this->Title;
+        return $this->title;
     }
 
-    public function setTitle(string $Title): self
+    public function setTitle(string $title): self
     {
-        $this->Title = $Title;
+        $this->title = $title;
 
         return $this;
     }

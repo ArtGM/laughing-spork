@@ -9,7 +9,7 @@ class AppTest extends WebTestCase
 {
 
 
-    public function testApp()
+    public function testApp(): void
     {
         $this->assertEquals(3, 2 + 1);
     }
