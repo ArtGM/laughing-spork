@@ -26,31 +26,16 @@ symfony check:requirements
 
 ### Installation
 
-1. Install the dependencies
-    ```bash
-    composer install
-    ```
-2. Run bdd
+1. Run bdd
     ```bash
     docker-compose up -d --build
     ```
-3. Doctrine and Database set up:
+2. Installation:
     ```bash
-    make database-dev
+    make install
     ```
-4. Data Fixtures
-    ```bash
-    make fixtures-dev
-    ```
-5. Assets:
-    ```bash
-    symfony console assets:install
-    ```
-   ```bash
-   yarn install && yarn encore dev
-   ```
 
-6. Run the server
+3. Run the server
     ```bash
     symfony server:start -d
    ```

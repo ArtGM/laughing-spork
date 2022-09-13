@@ -68,10 +68,9 @@ prepare-build:
 install:
 	composer install
 	composer update
-	symfony console doctrine:database:create
-	symfony console doctrine:schema:update --force
-	composer dump-autoload
-	yarn install
+	make prepare-dev
+	yarn install --force
+	yarn dev
 .PHONY: install
 
 deploy-dev:
