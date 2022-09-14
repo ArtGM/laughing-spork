@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Tests\Controller;
+namespace App\Tests\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class ConcertControllerTest extends WebTestCase
+class PostCrudControllerTest extends WebTestCase
 {
     public function testSomething(): void
     {
