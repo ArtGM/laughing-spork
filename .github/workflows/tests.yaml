@@ -3,6 +3,16 @@ name: Code Quality & Functional Tests
 on: [ push ]
 
 jobs:
+  services:
+    mysql:
+      image: mysql:5.7
+      env:
+        MYSQL_ALLOW_EMPTY_PASSWORD: false
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: main
+      ports:
+        - 3306/tcp
+      options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
   symfony:
     name: Symfony 5.4 (PHP ${{ matrix.php-versions }})
     runs-on: ubuntu-latest
@@ -65,3 +75,5 @@ jobs:
         run: |
            make prepare-test
            make tests
+        env:
+          DATABASE_URL: mysql://root:root@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/main
