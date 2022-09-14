@@ -2,12 +2,11 @@
 
 namespace App\Tests\Repository;
 
+use App\DataFixtures\AppFixtures;
 use App\Repository\UserRepository;
-
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use App\DataFixtures\AppFixtures;
 
 class UserRepositoryTest extends KernelTestCase
 {
@@ -32,7 +31,7 @@ class UserRepositoryTest extends KernelTestCase
         ]);
 
         $user = $container->get(UserRepository::class)->count([]);
-        $this->assertEquals(10, $user);
+        $this->assertGreaterThanOrEqual(10, $user);
     }
 
 }

@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class IndexAction
 {
     public function __invoke( Request $request, ViewResponder $viewResponder ): Response {
-        return $viewResponder( 'core/index.html.twig', [
+        return $viewResponder( 'home/index.html.twig', [
             'Hello' => 'World'
         ] );
     }

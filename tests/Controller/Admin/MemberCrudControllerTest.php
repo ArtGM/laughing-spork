@@ -12,6 +12,5 @@ class MemberCrudControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/');
 
         self::assertResponseIsSuccessful();
-        self::assertSelectorTextContains('h1', 'Hello World');
     }
 }
