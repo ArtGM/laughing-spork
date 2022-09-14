@@ -3,7 +3,9 @@ name: Code Quality & Functional Tests
 on: [ push ]
 
 jobs:
-  services:
+  symfony:
+    name: Symfony 5.4 (PHP ${{ matrix.php-versions }})
+    runs-on: ubuntu-latest
     mysql:
       image: mysql:5.7
       env:
@@ -13,9 +15,6 @@ jobs:
       ports:
         - 3306/tcp
       options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-  symfony:
-    name: Symfony 5.4 (PHP ${{ matrix.php-versions }})
-    runs-on: ubuntu-latest
     strategy:
       fail-fast: true
       matrix:
