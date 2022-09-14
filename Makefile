@@ -23,7 +23,7 @@ tests-coverage:
 
 local-tests:
 	symfony console cache:clear --env=test
-	symfony php bin/phpunit --testdox-html testdox.html
+	symfony php bin/phpunit --testdox
 
 tests:
 	symfony php bin/console doctrine:database:create --env=test

@@ -61,5 +61,7 @@ jobs:
           name: build
           path: public/build
 
-      ## - name: PHP Unit
-      ## run: make tests
+      - name: PHP Unit
+        run: |
+           make prepare-test
+           make tests
