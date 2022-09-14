@@ -1,4 +1,6 @@
 {
+    "name": "artgm/laughing-spork",
+    "description": "A website for a music band",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
@@ -98,8 +100,7 @@
         }
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest"
-        ,
+        "roave/security-advisories": "dev-latest",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "fakerphp/faker": "^1.19",
         "liip/test-fixtures-bundle": "^2.0.0",
