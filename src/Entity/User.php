@@ -4,13 +4,8 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\UuidInterface;
-use Ramsey\Uuid\Doctrine\UuidGenerator as UuidGenerator;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * @method string getUserIdentifier()
- */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[ORM\HasLifecycleCallbacks]
@@ -92,5 +87,10 @@ class User implements UserInterface, EntityInterface
     public function __call(string $name, array $arguments)
     {
         // TODO: Implement @method string getUserIdentifier()
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
     }
 }

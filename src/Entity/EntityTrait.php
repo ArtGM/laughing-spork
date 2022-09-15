@@ -5,7 +5,6 @@ namespace App\Entity;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator as UuidGenerator;
-use Ramsey\Uuid\UuidInterface;
 
 trait EntityTrait
 {
@@ -13,7 +12,7 @@ trait EntityTrait
     #[ORM\Column(type: "string", unique: true)]
     #[ORM\GeneratedValue(strategy: "CUSTOM")]
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
-    private UuidInterface $id;
+    private string $id;
 
     #[ORM\Column(type: 'datetime_immutable')]
     private DateTimeImmutable $createdAt;
@@ -36,7 +35,7 @@ trait EntityTrait
 
     public function getId(): string
     {
-        return $this->id->toString();
+        return $this->id;
     }
 
     public function getCreatedAt(): DateTimeImmutable

@@ -10,18 +10,22 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    public function __construct(private UserPasswordHasherInterface $userPasswordHasher)
+    {
+    }
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
         $faker->addProvider(new \Xvladqt\Faker\LoremFlickrProvider($faker));
 
-
         $admin = new User();
+        $password = $this->userPasswordHasher->hashPassword($admin, 'password');
         $admin->setEmail('admin@email.com');
-        $admin->setPassword('password');
+        $admin->setPassword($password);
         $admin->setRoles(['ROLE_ADMIN']);
 
         $manager->persist($admin);
