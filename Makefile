@@ -68,7 +68,7 @@ prepare-build:
 	yarn dev
 
 install:
-	cp .env .env.local
+	cp .env .env.test
 	sed -i -e 's/`BRANCH/$(BRANCH)/' .env.local
 	sed -i -e 's/USER/$(DATABASE_USER)/' .env.local
 	sed -i -e 's/PASSWORD/$(DATABASE_PASSWORD)/' .env.local
