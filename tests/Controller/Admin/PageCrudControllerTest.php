@@ -8,6 +8,7 @@ use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 class PageCrudControllerTest extends WebTestCase
 {
@@ -33,7 +34,7 @@ class PageCrudControllerTest extends WebTestCase
 
         self::assertResponseIsSuccessful();
 
-        $crawler = $client->request(
+        $client->request(
             "GET",
             $adminUrlGenerator
                 ->setController(PageCrudController::class)
@@ -45,10 +46,13 @@ class PageCrudControllerTest extends WebTestCase
 
         $client->submitForm('Créer', [
             'Page[title]' => 'Page de test',
-            'Page[content]' => 'Contenu de test',
+            'Page[content]' => 'Contenu de test', // TODO: implements visual editor
+            'Page[shortContent]' => 'Extrait de test',
+            'Page[metaDescription]' => 'Description SEO de test',
         ]);
 
-        self::assertResponseIsSuccessful();
+        self::assertResponseStatusCodeSame(Response::HTTP_FOUND);
+
         $page = $entityManager->getRepository(Page::class)->findOneBy(["title" => "Page de test"]);
         $client->request(
             "GET",
@@ -61,13 +65,15 @@ class PageCrudControllerTest extends WebTestCase
 
         self::assertResponseIsSuccessful();
 
-        $client->submitForm('Enregistrer', [
+        $client->submitForm('Sauvegarder', [
             'Page[title]' => 'Page de test modifiée',
             'Page[content]' => 'Contenu de test modifié',
+            'Page[shortContent]' => 'Extrait de test modifié',
+            'Page[metaDescription]' => 'Description SEO de test modifiée',
         ]);
 
-        self::assertResponseIsSuccessful();
-        $page = $entityManager->getRepository(Page::class)->findOneBy(["title" => "Page de test modifiée"]);
+        self::assertResponseStatusCodeSame(Response::HTTP_FOUND);
+
         $client->request(
             "GET",
             $adminUrlGenerator
@@ -77,7 +83,7 @@ class PageCrudControllerTest extends WebTestCase
                 ->generateUrl()
         );
 
-        self::assertResponseIsSuccessful();
+        self::assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
     }
 }
