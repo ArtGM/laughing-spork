@@ -12,7 +12,7 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: Password123!
         ports:
-          - 3306/3306
+          - 3306:3306
     strategy:
       fail-fast: true
       matrix:
