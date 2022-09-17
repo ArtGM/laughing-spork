@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use App\Repository\ConcertRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Doctrine\UuidGenerator as UuidGenerator;
-use Ramsey\Uuid\UuidInterface;
 
 #[ORM\Entity(repositoryClass: ConcertRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -71,5 +69,10 @@ class Concert implements EntityInterface
         $this->place = $place;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->title;
     }
 }

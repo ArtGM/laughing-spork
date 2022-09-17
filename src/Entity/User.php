@@ -76,9 +76,9 @@ class User implements UserInterface, EntityInterface
         return $this;
     }
 
-    public function getSalt()
+    public function getSalt(): ?string
     {
-        // TODO: Implement getSalt() method.
+        return null;
     }
 
     public function eraseCredentials()

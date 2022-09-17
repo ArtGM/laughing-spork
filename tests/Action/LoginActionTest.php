@@ -31,7 +31,7 @@ class LoginActionTest extends \Symfony\Bundle\FrameworkBundle\Test\WebTestCase
 
         self::assertResponseStatusCodeSame(Response::HTTP_FOUND);
         $client->followRedirect();
-        self::assertSelectorTextContains('div.alert.alert-danger', 'Invalid credentials.');
+        self::assertSelectorTextContains('div.alert.alert-danger', 'Identifiants invalides.');
     }
 
     public function testLoginWithGoodCredentials(): void

@@ -14,9 +14,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
-    public function __construct(private UserPasswordHasherInterface $userPasswordHasher)
+    public function __construct(private readonly UserPasswordHasherInterface $userPasswordHasher)
     {
     }
+
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
