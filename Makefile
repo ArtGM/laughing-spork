@@ -31,7 +31,6 @@ debug-tests:
 	symfony php bin/phpunit --testdox
 
 tests:
-	symfony php bin/console cache:clear --env=test
 	symfony php bin/phpunit
 
 fixtures-test:
@@ -69,6 +68,7 @@ prepare-build:
 
 install:
 	cp .env .env.test
+	echo 'KERNEL_CLASS="App\Kernel"' >> .env.test
 	sed -i -e 's/`BRANCH/$(BRANCH)/' .env.test
 	sed -i -e 's/USER/$(DATABASE_USER)/' .env.test
 	sed -i -e 's/PASSWORD/$(DATABASE_PASSWORD)/' .env.test
