@@ -73,6 +73,7 @@ install:
 	sed -i -e 's/USER/$(DATABASE_USER)/' .env.test
 	sed -i -e 's/PASSWORD/$(DATABASE_PASSWORD)/' .env.test
 	composer install
+	yarn install --force
 .PHONY: install
 
 deploy-dev:
