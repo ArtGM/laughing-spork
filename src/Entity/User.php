@@ -69,7 +69,9 @@ class User implements UserInterface, EntityInterface
 
     public function setRoles(?array $roles): self
     {
-        $this->roles = $roles;
+        $roles[] = 'ROLE_USER';
+
+        $this->roles = array_unique($roles);
 
         return $this;
     }
@@ -92,5 +94,10 @@ class User implements UserInterface, EntityInterface
     public function getUserIdentifier(): string
     {
         return $this->email;
+    }
+
+    public function __toString(): string
+    {
+        return $this->username ?? $this->email;
     }
 }

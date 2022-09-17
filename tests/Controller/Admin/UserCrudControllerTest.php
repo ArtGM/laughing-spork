@@ -4,7 +4,7 @@ namespace App\Tests\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class SecurityCrudControllerTest extends WebTestCase
+class UserCrudControllerTest extends WebTestCase
 {
     public function testSomething(): void
     {
