@@ -41,9 +41,9 @@ fixtures-dev:
 	symfony console doctrine:fixtures:load -n --env=dev
 
 database-test:
-	symfony php bin/console doctrine:database:drop --if-exists --force --env=test
-	symfony php bin/console doctrine:database:create --env=test
-	symfony php bin/console doctrine:schema:update --force --env=test
+	symfony console doctrine:database:drop --if-exists --force --env=test
+	symfony console doctrine:database:create --env=test
+	symfony console doctrine:schema:update --force --env=test
 
 database-dev:
 	symfony console doctrine:database:drop --if-exists --force --env=dev
