@@ -69,9 +69,9 @@ prepare-build:
 
 install:
 	cp .env .env.test
-	sed -i -e 's/`BRANCH/$(BRANCH)/' .env.local
-	sed -i -e 's/USER/$(DATABASE_USER)/' .env.local
-	sed -i -e 's/PASSWORD/$(DATABASE_PASSWORD)/' .env.local
+	sed -i -e 's/`BRANCH/$(BRANCH)/' .env.test
+	sed -i -e 's/USER/$(DATABASE_USER)/' .env.test
+	sed -i -e 's/PASSWORD/$(DATABASE_PASSWORD)/' .env.test
 	composer install
 .PHONY: install
 
