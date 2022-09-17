@@ -1,8 +1,13 @@
-unit-tests:
-	php bin/phpunit --testsuite unit
-
-functional-tests:
-	php bin/phpunit --testsuite functional
+ifneq (,$(findstring feature-,$(BRANCH)))
+	TEMP_NAME=$(subst $(findstring feature-,$(BRANCH)),feature/,$(BRANCH))
+else
+	TEMP_NAME=$(BRANCH)
+endif
+ifneq (,$(findstring release-,$(TEMP_NAME)))
+	BRANCH_NAME=$(subst $(findstring release-,$(TEMP_NAME)),release/,$(TEMP_NAME))
+else
+	BRANCH_NAME=$(TEMP_NAME)
+endif
 
 .PHONY: fix
 fix:
@@ -21,7 +26,7 @@ analyze:
 tests-coverage:
 	XDEBUG_MODE=coverage symfony php vendor/bin/phpunit --coverage-html test-coverage/
 
-local-tests:
+debug-tests:
 	symfony console cache:clear --env=test
 	symfony php bin/phpunit --testdox
 
@@ -64,6 +69,7 @@ prepare-build:
 
 install:
 	cp .env .env.local
+	sed -i -e 's/`BRANCH/$(BRANCH)/' .env.local
 	sed -i -e 's/USER/$(DATABASE_USER)/' .env.local
 	sed -i -e 's/PASSWORD/$(DATABASE_PASSWORD)/' .env.local
 	composer install
