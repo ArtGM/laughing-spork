@@ -26,11 +26,8 @@ local-tests:
 	symfony php bin/phpunit --testdox
 
 tests:
-	symfony php bin/console doctrine:database:create --env=test
-	symfony php bin/console doctrine:schema:update --force --env=test
-	symfony php bin/console doctrine:fixtures:load --env=test --no-interaction
 	symfony php bin/console cache:clear --env=test
-	symfony php bin/phpunit --testdox
+	symfony php bin/phpunit
 
 fixtures-test:
 	symfony php bin/console doctrine:fixtures:load -n --env=test
@@ -66,11 +63,10 @@ prepare-build:
 	yarn dev
 
 install:
+	cp .env .env.local
+	sed -i -e 's/USER/$(DATABASE_USER)/' .env.local
+	sed -i -e 's/PASSWORD/$(DATABASE_PASSWORD)/' .env.local
 	composer install
-	composer update
-	make prepare-dev
-	yarn install --force
-	yarn dev
 .PHONY: install
 
 deploy-dev:

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Concert;
+use App\Entity\Page;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -29,6 +30,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
         yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-users', User::class);
         yield MenuItem::linkToCrud('Concerts', 'fa fa-guitar', Concert::class);
+        yield MenuItem::linkToCrud('Pages', 'fa fa-file', Page::class);
     }
 
 }

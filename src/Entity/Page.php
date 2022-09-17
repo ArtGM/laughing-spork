@@ -17,10 +17,49 @@ class Page implements EntityInterface
     private ?string $title;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $content;
+    private ?string $content = null;
 
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $slug;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $shortContent = null;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $metaDescription = null;
+
+    /**
+     * @return string|null
+     */
+    public function getShortContent(): ?string
+    {
+        return $this->shortContent;
+    }
+
+    /**
+     * @param string|null $shortContent
+     */
+    public function setShortContent(?string $shortContent): void
+    {
+        $this->shortContent = $shortContent;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getMetaDescription(): ?string
+    {
+        return $this->metaDescription;
+    }
+
+    /**
+     * @param string|null $metaDescription
+     */
+    public function setMetaDescription(?string $metaDescription): void
+    {
+        $this->metaDescription = $metaDescription;
+    }
+
 
     public function getTitle(): ?string
     {
