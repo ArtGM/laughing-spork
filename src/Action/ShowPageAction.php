@@ -7,7 +7,7 @@ use App\Responder\ViewResponder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/{slug}', name: 'show_page')]
+#[Route('/page/{slug}', name: 'show_page')]
 class ShowPageAction
 {
     public function __construct(private readonly PageRepository $pageRepository)
