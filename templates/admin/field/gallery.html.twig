@@ -1,0 +1,34 @@
+<div class="glide" data-count="{{ field.value | length }}">
+    {% if field.value | length > 4 %}
+        <div class="glide__track" data-glide-el="track" >
+            <ul class="glide__slides">
+                {% for image in field.value %}
+                    <li class="glide__slide">
+                        <a href="#"  data-ea-lightbox-content-selector="#ea-lightbox-{{ image.id }}" >
+                            <img src="/uploads/{{ image.image }}" alt="">
+                        </a>
+                        <div id="ea-lightbox-{{ image.id }}" class="ea-lightbox">
+                            <img src="/uploads/{{ image.image }}" alt="">
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="glide__arrows" data-glide-el="controls">
+            <button class="glide__arrow glide__arrow--left" data-glide-dir="<">Précédent</button>
+            <button class="glide__arrow glide__arrow--right" data-glide-dir=">">Suivant</button>
+        </div>
+    {% else %}
+        <div class="form-widget">
+            {%  for image in field.value %}
+                <a href="#" class="ea-lightbox-thumbnail" data-ea-lightbox-content-selector="#ea-lightbox-{{ image.id }}" >
+                    <img src="/uploads/{{ image.image }}" alt="">
+                </a>
+                <div id="ea-lightbox-{{ image.id }}" class="ea-lightbox">
+                    <img src="/uploads/{{ image.image }}" alt="">
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{# TODO: improve gallery template thumbnail #}

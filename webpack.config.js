@@ -28,7 +28,7 @@ Encore
   .addEntry('twitterFetcher', './assets/js/twitterFetcher_min.js')
   .addEntry('placeholder', './assets/js/placeholders.min.js')
   .addEntry('app-style', './assets/styles/app.scss')
-
+  .addEntry('gallery', './assets/js/gallery.js')
 
   // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
   .enableStimulusBridge('./assets/controllers.json')

@@ -7,8 +7,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
-use Ramsey\Uuid\Doctrine\UuidGenerator as UuidGenerator;
-use Ramsey\Uuid\UuidInterface;
 
 #[ORM\Entity(repositoryClass: PhotoRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -20,7 +18,7 @@ class Photo implements EntityInterface
     private ?string $title;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private string $image;
+    private ?string $image;
 
     private File $file;
 
@@ -88,5 +86,10 @@ class Photo implements EntityInterface
     public function setImage(string $image): void
     {
         $this->image = $image;
+    }
+
+    public function __toString(): string
+    {
+       return $this->title;
     }
 }

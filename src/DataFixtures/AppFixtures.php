@@ -56,8 +56,9 @@ class AppFixtures extends Fixture
 
         for ($i = 0; $i < 50; ++$i) {
             $file = new File($faker->image(null, 640, 480, ['music']));
-            $file->move('public/images', $file->getFilename());
+            $file->move('public/uploads', $file->getFilename());
             $photo = new Photo();
+            $photo->setTitle($faker->sentence(3));
             $photo->setFile($file);
             $photo->setImage($file->getFilename());
             $gallery->addImage($photo);
