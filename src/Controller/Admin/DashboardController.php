@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Concert;
 use App\Entity\Gallery;
+use App\Entity\Member;
 use App\Entity\Page;
 use App\Entity\Photo;
 use App\Entity\User;
@@ -31,7 +32,8 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
-        yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-users', User::class);
+        yield MenuItem::linkToCrud('Membres', 'fas fa-users', Member::class);
+        yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-users', User::class)->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Concerts', 'fa fa-guitar', Concert::class);
         yield MenuItem::linkToCrud('Pages', 'fa fa-file', Page::class);
         yield MenuItem::subMenu('Médiathèque', 'fa fa-images')->setSubItems([

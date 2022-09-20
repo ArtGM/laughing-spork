@@ -44,6 +44,7 @@ class GalleryCrudController extends AbstractCrudController
     {
         yield TextField::new('title', 'Titre')->setRequired(true);
         yield AssociationField::new('images', 'Photos')
+            ->hideOnIndex()
             ->setTemplatePath('admin/field/gallery.html.twig');
     }
 

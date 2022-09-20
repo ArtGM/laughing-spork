@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Concert;
 use App\Entity\Gallery;
+use App\Entity\Member;
 use App\Entity\Page;
 use App\Entity\Photo;
 use App\Entity\User;
@@ -63,8 +64,17 @@ class AppFixtures extends Fixture
             $photo->setImage($file->getFilename());
             $gallery->addImage($photo);
         }
-
         $manager->persist($gallery);
+
+        for ($i = 0; $i < 5; ++$i) {
+            $member = new Member();
+            $member->setFirstname($faker->firstName());
+            $member->setLastname($faker->lastName());
+            $member->setResume($faker->paragraph(3));
+            $member->setPhoto($faker->imageUrl(640, 480, 'people'));
+            $manager->persist($member);
+        }
+
         $manager->flush();
     }
 }
