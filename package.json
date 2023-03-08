@@ -21,6 +21,6 @@
         "jquery": "^3.6.1",
         "popper.js": "^1.16.1",
         "sass": "^1.54.9",
-        "sass-loader": "^13.0.2"
+        "sass-loader": "^13.2.0"
     }
 }
