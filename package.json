@@ -18,7 +18,7 @@
     "dependencies": {
         "@glidejs/glide": "^3.5.2",
         "bootstrap": "4",
-        "jquery": "^3.6.1",
+        "jquery": "^3.6.3",
         "popper.js": "^1.16.1",
         "sass": "^1.54.9",
         "sass-loader": "^13.0.2"
